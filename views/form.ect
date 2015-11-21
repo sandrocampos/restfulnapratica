@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+    <meta name="author" content="Sandro Campos">
+    <title>Restfull na prática</title>
+    <link href="libs/bootstrap.min.css" rel="stylesheet">
+    <link href="libs/toastr.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+  </head>
+
+  <body ng-app="app" ng-controller="AppController">
+
+    <div class="container">
+      <h1>Restful na prática</h1>
+      <h3>Operações disponíveis:</h3>
+
+			<ul class="nav nav-tabs" role="tablist">
+		    <li class="active"><a href="#getAll" aria-controls="getAll" role="tab" data-toggle="tab" class="btnGet">GET</a></li>
+		    <li><a href="#get" aria-controls="get" role="tab" data-toggle="tab" class="btnGet">GET</a></li>
+		    <li><a href="#post" aria-controls="post" role="tab" data-toggle="tab" class="btnPost">POST</a></li>
+		    <li><a href="#put" aria-controls="put" role="tab" data-toggle="tab" class="btnPut">PUT</a></li>
+		    <li><a href="#delete" aria-controls="delete" role="tab" data-toggle="tab" class="btnDelete">DELETE</a></li>
+		  </ul>
+
+		  <div class="tab-content">
+		    <div role="tabpanel" class="tab-pane active" id="getAll">
+		    	<h3>Alunos</h3>
+		      <table class="table table-condensed">
+			      <thead>
+			        <tr>
+			          <th>#</th>
+			          <th>Matrícula</th>
+			          <th>Nome</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+			        <tr ng-repeat="aluno in alunos | orderBy:'nome'">
+			          <th scope="row">{{$index+1}}</th>
+			          <td>{{ aluno.matricula }}</td>
+			          <td>{{ aluno.nome }}</td>
+			        </tr>
+			      </tbody>
+			    </table>
+				  <button ng-click="listar()" class="btn btn-default">Enviar</button>
+		    </div>
+		    <div role="tabpanel" class="tab-pane" id="get">
+		    	<h3>Aluno específico</h3>
+		      <table class="table table-condensed">
+			      <thead>
+			        <tr>
+			          <th>#</th>
+			          <th>Matrícula</th>
+			          <th>Nome</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+			        <tr>
+			          <th scope="row"></th>
+			          <td>{{ aluno.matricula }}</td>
+			          <td>{{ aluno.nome }}</td>
+			        </tr>
+			      </tbody>
+			    </table>
+					<div class="form-group">
+				    <input type="text" class="form-control" ng-model="listarMatricula" placeholder="Número de matrícula">
+				  </div>
+				  <button ng-click="listarEspecifico()" class="btn btn-default">Enviar</button>
+		    </div>
+		    <div role="tabpanel" class="tab-pane" id="post">
+					<h3>Adicionar</h3>
+		      <form>
+		      	<div class="form-group">
+					    <label>Matrícula</label>
+					    <input type="text" ng-model="pessoaAdd.matricula" class="form-control" placeholder="Número de matrícula">
+					  </div>
+					  <div class="form-group">
+					    <label>Nome</label>
+					    <input type="text" ng-model="pessoaAdd.nome" class="form-control" placeholder="Seu nome">
+					  </div>
+					  <button ng-click="adicionar()" class="btn btn-default">Enviar</button>
+					</form>
+		    </div>
+		    <div role="tabpanel" class="tab-pane" id="put">
+		    	<h3>Editar</h3>
+					<form>
+						<div class="form-group">
+					    <label for="matricula">Matrícula</label>
+					    <input type="text" ng-model="pessoaEdit.matricula" class="form-control" id="matricula" placeholder="Número de matrícula">
+					  </div>
+					  <div class="form-group">
+					    <label>Nome</label>
+					    <input type="text" ng-model="pessoaEdit.nome" class="form-control" placeholder="Seu nome">
+					  </div>
+					  <button ng-click="editar()" class="btn btn-default">Enviar</button>
+					</form>
+		    </div>
+		    <div role="tabpanel" class="tab-pane" id="delete">
+		    	<h3>Remover</h3>
+					<form>
+						<div class="form-group">
+					    <label>Matrícula</label>
+					    <input type="text" ng-model="pessoaRemove.matricula" class="form-control" placeholder="Número de matrícula">
+					  </div>
+					  <button ng-click="remover()" class="btn btn-default">Enviar</button>
+					</form>
+		    </div>
+		  </div>
+
+    </div>
+    <script src="libs/jquery.min.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="libs/toastr.js"></script>
+    <script src="conf.js"></script>
+    <script src="libs/angular.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
